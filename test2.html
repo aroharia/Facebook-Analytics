@@ -1,0 +1,53 @@
+<head>
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+<!-- Plotly chart will be drawn inside this DIV -->
+<div id="myDiv"></div>
+  <script>
+  /* JAVASCRIPT CODE GOES HERE */
+  
+        Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(err, rows){
+
+          function unpack(rows, key) {
+          return rows.map(function(row) { return row[key]; });
+        }
+
+          
+        var trace1 = {
+          type: "scatter",
+          mode: "lines",
+          x: unpack(rows, 'status_published'),
+          y: unpack(rows, 'num_reactions'),
+          line: {color: '#17BECF'}
+        }
+
+        var trace2 = {
+          type: "scatter",
+          mode: "lines",
+          x: unpack(rows, 'status_published'),
+          y: unpack(rows, 'num_comments'),
+          line: {color: '#7F7F7F'}
+        }
+
+        var data = [trace1,trace2];
+            
+        var layout = {
+          title: 'Custom Range', 
+          xaxis: {
+            
+            type: 'date'
+          }, 
+          yaxis: {
+            autorange: true, 
+            
+            type: 'linear'
+          }
+        };
+
+        Plotly.newPlot('myDiv', data, layout);
+        })
+  </script>
+</body>
+</html>
