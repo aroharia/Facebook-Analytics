@@ -25,7 +25,6 @@ except ImportError:
 app_id = "" #Hiding for privacy
 app_secret = ""  #Hiding for privacy
 page_id = "103420729696747" #Texas Mohini FB Page
-fileName = ""
 
 # input date formatted as YYYY-MM-DD
 since_date = ""
@@ -140,8 +139,7 @@ def processFacebookPageFeedStatus(status):
 
 
 def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date):
-    with open('{}_facebook_statuses.csv'.format(page_id), 'w') as file:
-        fileName = file
+    with open('{}_facebook_statuses.csv'.format(page_id), 'wb') as file:
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",
                     "status_link", "status_published", "num_reactions",
@@ -199,16 +197,8 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date):
         print("\nDone!\n{} Statuses Processed in {}".format(
               num_processed, datetime.datetime.now() - scrape_starttime))
 
-              
-def cleanUp():
-    print fileName
-    #os.rename(file, 'myfile.csv.bak')
-    #with open('myfile.csv.bak', 'rU') as infile, open(file, 'wU') as outfile:
-    #    for line in infile:
-    #        outfile.write(line.replace('\r'))
-    #os.remove('myfile.csv.bak')
+        
 
 if __name__ == '__main__':
     print ("Facebook Page Data")
     scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date)
-    cleanUp()
