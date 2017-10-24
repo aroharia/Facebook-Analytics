@@ -22,6 +22,9 @@ try:
 except ImportError:
     from urllib2 import urlopen, Request
 
+app_id = "" #Hiding for privacy
+app_secret = ""  #Hiding for privacy
+page_id = "103420729696747" #Texas Mohini FB Page
 fileName = ""
 
 # input date formatted as YYYY-MM-DD
@@ -137,6 +140,7 @@ def processFacebookPageFeedStatus(status):
 
 
 def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date):
+    with open('{}_facebook_statuses.csv'.format(page_id), 'w') as file:
         fileName = file
         w = csv.writer(file)
         w.writerow(["status_id", "status_message", "link_name", "status_type",
