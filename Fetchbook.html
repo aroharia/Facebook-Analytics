@@ -1,0 +1,85 @@
+<head>
+  <!-- Plotly.js -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <div id="figure1" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="figure2" style="width: 900px; height: 500px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <script>
+    <!-- GRAPH 1 -->
+    function makeplot() {
+        Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(data){ processData(data) } );
+    };
+        
+    function processData(allRows) {
+
+        console.log(allRows);
+        var x = [], y = [];
+
+        for (var i=0; i<allRows.length; i++) {
+            row = allRows[i];
+            x.push( row['status_published'] );
+            y.push( row['num_reactions'] );
+        }
+        console.log( 'X',x, 'Y',y );
+        makePlotly( x, y, );
+    }
+
+    function makePlotly( x, y ){
+        var plotDiv = document.getElementById("plot");
+        var traces = [{
+            x: x, 
+            y: y
+        }];
+
+        Plotly.newPlot('figure1', traces, 
+            {title: 'Number of Reactions'});
+    };
+      makeplot();
+      
+      <!-- GRAPH 2 -->
+      Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(err, rows){
+
+          function unpack(rows, key) {
+          return rows.map(function(row) { return row[key]; });
+        }
+
+          
+        var trace1 = {
+          name: "Likes",
+          type: "scatter",
+          mode: "lines",
+          x: unpack(rows, 'status_published'),
+          y: unpack(rows, 'num_reactions'),
+          line: {color: '#17BECF'}
+        }
+
+        var trace2 = {
+          name: "Comments",
+          type: "scatter",
+          mode: "lines",
+          x: unpack(rows, 'status_published'),
+          y: unpack(rows, 'num_comments'),
+          line: {color: '#7F7F7F'}
+        }
+
+        var data = [trace1,trace2];
+            
+        var layout = {
+          title: 'Number of Reactions & Comments', 
+          xaxis: {
+            title: 'Date',
+            type: 'date'
+          }, 
+          yaxis: {
+            autorange: true, 
+            title: 'Number of People',
+            type: 'linear'
+          }
+        };
+
+        Plotly.newPlot('figure2', data, layout);
+        })
+  </script>
+</body>
