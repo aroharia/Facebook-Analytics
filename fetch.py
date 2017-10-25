@@ -5,10 +5,6 @@
 # INPUT: ID of Facebook page
 # OUTPUT: CSV file of the Facebook page's post data
 
-import plotly.plotly as py
-import plotly.graph_objs as go
-import plotly.figure_factory as FF
-
 import numpy as np
 import pandas as pd
 
@@ -178,9 +174,6 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date):
 
                     # calculate thankful/pride through algebra
                     num_special = status_data[6] - sum(reactions_data)
-                    #print status_data
-                    #print reactions_data
-                    #print num_special
                     w.writerow(status_data + reactions_data)
 
                 num_processed += 1
@@ -196,9 +189,17 @@ def scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date):
 
         print("\nDone!\n{} Statuses Processed in {}".format(
               num_processed, datetime.datetime.now() - scrape_starttime))
+        print("New CSV has been created!")
+        print("----------------------------------------------------")
+        print("{}_facebook_statuses.csv".format(page_id))
+        print("----------------------------------------------------")
 
         
 
 if __name__ == '__main__':
-    print ("Facebook Page Data")
+    print ("----------------------------------------------------")
+    print ("----------------------------------------------------")
+    print ("----------------- F e t c h b o o k ----------------")
+    print ("----------------------------------------------------")
+    print ("----------------------------------------------------")
     scrapeFacebookPageFeedStatus(page_id, access_token, since_date, until_date)
