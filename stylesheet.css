@@ -122,6 +122,10 @@ body {
     height: 350px;
 }
 
+.plots iframe{
+    background-color: white;
+}
+
 /* ============================================================= */
 
 #footer {
