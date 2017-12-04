@@ -26,21 +26,37 @@
             
             <div id="dropdown_container">
                 <div class="dropdown">
-                    <button onclick="showdropdown()" class="dropbtn">Select a Facebook Page</button>
+                    <button onclick="showdropdown()" class="dropbtn">Select Facebook Page</button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="fetch%20Mohini.html">Texas Mohini Group</a>
                         <a href="">UT Netmemes for Neutrality Supporting Teens Group</a>
                         <a href="fetch.html">Reset</a>
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
-        
+
         <!-- ================================================== -->
         
+        
+        
+        <!-- ================================================== -->
+
         <div id="plotgrid">
-            <div class="empties"></div>
-            <div class="empties"></div>
+            <div id="heading">
+                <p>Texas Mohini Facebook Group</p>
+                <hr width=50%>
+            </div>
+            <div class="plots" id="figure1"><!-- Plotly chart will be drawn inside this DIV --></div>
+            <div class="plots" id="figure2"><!-- Plotly chart will be drawn inside this DIV --></div>
+            <div class="plots">
+                <h3>Most Common Words:</h3>
+                <iframe src="rankedwords.txt"></iframe>
+            </div>
+            <div class="plots">
+                <h3>Most Common Phrases:</h3>
+                <iframe src="rankedphrases.txt"></iframe>
+            </div>
         </div>
 
         <!-- ================================================== -->
@@ -54,11 +70,16 @@
     <!-- ===================================================== -->
     
     <script>
+        
         /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
         function showdropdown() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
         
+        function getdata() {
+            document.getElementById("plotgrid").classList.toggle("show");
+        }
+
         // Close the dropdown menu if the user clicks outside of it
         window.onclick = function(event) {
           if (!event.target.matches('.dropbtn')) {
@@ -74,7 +95,6 @@
           }
         }
         
-        /*
         <!-- GRAPH 1 -->
         function makeplot() {
             Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(data){ processData(data) } );
@@ -148,8 +168,6 @@
         };
 
         Plotly.newPlot('figure2', data, layout);
-        
         })
-        */
     </script>
 </body>
