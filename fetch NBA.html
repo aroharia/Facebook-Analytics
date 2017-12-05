@@ -34,14 +34,26 @@
                         <a href="fetch.html">Reset</a>
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
         
         <!-- ================================================== -->
-        
+
         <div id="plotgrid">
-            <div class="empties"></div>
-            <div class="empties"></div>
+            <div id="heading">
+                <p>NBA Memes Facebook Page</p>
+                <hr width=50%>
+            </div>
+            <div class="plots" id="figure1"><!-- Plotly chart will be drawn inside this DIV --></div>
+            <div class="plots" id="figure2"><!-- Plotly chart will be drawn inside this DIV --></div>
+            <div class="plots">
+                <h3>Most Common Words:</h3>
+                <iframe src="NBArankedwords.txt"></iframe>
+            </div>
+            <div class="plots">
+                <h3>Most Common Phrases:</h3>
+                <iframe src="NBArankedphrases.txt"></iframe>
+            </div>
         </div>
 
         <!-- ================================================== -->
@@ -55,11 +67,16 @@
     <!-- ===================================================== -->
     
     <script>
+        
         /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
         function showdropdown() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
         
+        function getdata() {
+            document.getElementById("plotgrid").classList.toggle("show");
+        }
+
         // Close the dropdown menu if the user clicks outside of it
         window.onclick = function(event) {
           if (!event.target.matches('.dropbtn')) {
@@ -75,10 +92,9 @@
           }
         }
         
-        /*
         <!-- GRAPH 1 -->
         function makeplot() {
-            Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(data){ processData(data) } );
+            Plotly.d3.csv("367810133247517_facebook_statuses.csv", function(data){ processData(data) } );
         };
 
         function processData(allRows) {
@@ -108,7 +124,7 @@
         makeplot();
 
         <!-- GRAPH 2 -->
-        Plotly.d3.csv("103420729696747_facebook_statuses.csv", function(err, rows){
+        Plotly.d3.csv("367810133247517_facebook_statuses.csv", function(err, rows){
 
           function unpack(rows, key) {
           return rows.map(function(row) { return row[key]; });
@@ -149,8 +165,6 @@
         };
 
         Plotly.newPlot('figure2', data, layout);
-        
         })
-        */
     </script>
 </body>
